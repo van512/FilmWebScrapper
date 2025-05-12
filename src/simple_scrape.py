@@ -47,7 +47,7 @@ def process_people(crew_list, cast_list, movie_id, top_n_cast=3):
                 'person_name': person.get('name'),
                 'role': role,
                 'debut_year': debut_year,
-                'years_active': 2025 - debut_year if debut_year else None,
+                'years_active': 2025 - debut_year if debut_year else None, # maybe stopped being active before 2025
                 'last_five_films': last_five_titles,
                 'last_five_ids': last_five_ids
             }
@@ -68,7 +68,7 @@ def scrape_movie_and_people(movie_id):
     movie_record = {
     'movie_id': movie_id,
     'title': movie_details.get('title'),
-    'revenue': movie_details.get('revenue'),  # global box office performance (national not available in tmdb)
+    'revenue': movie_details.get('revenue'),  # global box office performance (national not available in tmdb), deal with 0 values
     'vote_average': movie_details.get('vote_average'),  # tmdb score
     'vote_count': movie_details.get('vote_count'),  # tmdb nbr of user ratings
     'watch_providers': ", ".join([provider.get('provider_name', '') for provider in movie_watch_providers.get('results', {}).get('GB', {}).get('flatrate', [])]),  # Join all provider names by comma
